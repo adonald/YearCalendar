@@ -8,5 +8,9 @@
 }
 
 .calendar {
-    font-size: 95%;
+    font-size: 90%;
+}
+
+.calendar .month {
+    padding-top: 0;
 }
