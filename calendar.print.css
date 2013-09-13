@@ -1,0 +1,12 @@
+* {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.noprint {
+    display: none;
+}
+
+.calendar {
+    font-size: 95%;
+}

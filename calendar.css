@@ -1,0 +1,61 @@
+.select-year {
+    padding: 5px 0 15px 15px;
+    font-weight: bold;
+}
+
+.select-year input {
+    width: 100px;
+    margin-bottom:5px;
+    padding:2px 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border:1px solid #ccc;
+}
+
+.select-year button {
+    width: 100px;
+    margin-bottom:5px;
+    padding:2px 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border:1px solid #ccc;
+    cursor:pointer;
+    color: #333;
+}
+
+.select-year button:hover, .select-year button:focus {
+    border:1px solid #333;
+    background: #ccc;
+}
+
+.calendar {
+    border: none;
+    border-collapse: collapse;
+    margin: 0 10px;
+    width: 300px;
+}
+
+.calendar .month {
+    text-align: right;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.calendar .table-header {
+    background-color: #eee;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 5px;
+    border-bottom: 1px solid #333;
+}
+
+.calendar td {
+    text-align: right;
+    padding: 0 5px;
+}
+
+.weekend {
+    background-color: #f0f0f0;
+}
