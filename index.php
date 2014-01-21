@@ -242,21 +242,117 @@ function calendarTypesDropdown($selected) {
 }
 ?>
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $year; ?> Calendar &mdash; www.adonald.co.uk</title>
-    <link rel="stylesheet" href="/pocketgrid/pocketgrid.min.css" />
-    <link rel="stylesheet" href="calendar.css" />
-    <link rel="stylesheet" href="calendar.print.css" media="print" />
+    <title>Printable calendar &#124; www.adonald.co.uk</title>
+    <meta name="author" content="Alex Donald">
+    <link rel="stylesheet" href="/css/adonald.max.css" />
+    <style type="text/css">
+        /*! PocketGrid 1.1.0
+        * Copyright 2013 Arnaud Leray
+        * MIT License
+        */.block-group,.block,.block-group:after,.block:after,.block-group:before,.block:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+        .block-group{*zoom:1}
+        .block-group:before,.block-group:after{display:table;content:"";line-height:0}
+        .block-group:after{clear:both}
+        .block-group{list-style-type:none;padding:0;margin:0}
+        .block-group>.block-group{clear:none;float:left;margin:0 !important}
+        .block{float:left;width:100%}
+        /* Keep PocketGrid at the top! */
+        .select-year {
+            padding: 5px 0 15px 15px;
+            font-weight: bold;
+        }
+        .year-calendar {
+            margin-bottom: 10px;
+        }
+        .single-month-calendar {
+            text-align:center;
+        }
+        .month-calendar {
+            border: none;
+            border-collapse: collapse;
+            margin: 0 10px;
+            width: 300px;
+        }
+        .single-month-calendar .month-calendar {
+            width: 560px;
+            height: 400px;
+            border-collapse: none;
+            border: 1px solid #000;
+        }
+        .single-month-calendar td {
+            border: 1px solid #000;
+            width: 80px;
+        }
+        .month-calendar .month {
+            text-align: right;
+            font-weight: bold;
+            padding: 2px 5px;
+        }
+        .single-month-calendar .month {
+            font-size: 3em;
+            line-height: 1.5em;
+        }
+        .month-calendar .table-header {
+            background-color: #9cf;
+            font-weight: bold;
+            text-align: center;
+            padding: 0 5px;
+            border-bottom: 1px solid #333;
+        }
+        .month-calendar td {
+            text-align: right;
+            padding: 0 5px;
+        }
+        .weekend {
+            background-color: #ccc;
+        }
+        .holiday {
+            background-color: #ceb59d;
+        }
+        /* Print styles */
+        @media print {
+            /* Force webkit to show background colours */
+            * {-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+            /* Hide "noprint" elements */
+            .noprint {display: none;}
+            /* Shrink slightly to fit on one page */
+            .month-calendar {font-size: 90%;}
+            .month-calendar .month {padding-top: 0;}
+            .single-month-calendar .month-calendar {height: 600px;}
+        }
+    </style>
 </head>
 <body>
+<header>
+    <div class="header-logo">
+        <h1><a href="/" title="Alex Donald">Alex Donald</a></h1>
+    </div>
+    <nav class="header-nav">
+        <ul>
+            <li><a href="/" title="Home">Home</a></li><li><a href="/projects" title="Projects" class="current">Projects</a></li><li><a href="/blog" title="Blog">Blog</a></li><li><a href="/about" title="About">About</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="main">
+    <section class="content">
 
 <?php
 // Display all months in current or chosen year
 echo calendar($type, $year, $month, $holidays);
 ?>
 
+    </section>
+</section>
+<footer>
+    <section class="copyright">
+        <p>Built with <a href="http://jekyllrb.com/">Jekyll</a></p>
+        <p></p>Hosted on <a href="http://www.webfaction.com/?affiliate=adonald">WebFaction</a> (affiliate link)</p>
+        <p></p>&copy; Alex Donald &mdash; Help yourself!</p>
+    </section>
+</footer>
 </body>
 </html>
