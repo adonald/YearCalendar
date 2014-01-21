@@ -244,7 +244,7 @@ function month_calendar($year, $month, $bank_holidays) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Printable calendar &#124; www.adonald.co.uk</title>
     <meta name="author" content="Alex Donald">
-    <link rel="stylesheet" href="/pocketgrid/pocketgrid.min.css" />
+    <link rel="stylesheet" href="pocketgrid/pocketgrid.min.css" />
     <style type="text/css">
         .select-year {
             padding: 5px 0 15px 15px;
