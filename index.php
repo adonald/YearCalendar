@@ -17,7 +17,7 @@ if (ctype_digit($_POST["year"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $year; ?> Calendar &mdash; www.adonald.co.uk</title>
-    <link rel="stylesheet" href="/pockegrid/pocketgrid.min.css" />
+    <link rel="stylesheet" href="/pocketgrid/pocketgrid.min.css" />
     <link rel="stylesheet" href="calendar.css" />
     <link rel="stylesheet" href="calendar.print.css" media="print" />
 </head>
