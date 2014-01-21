@@ -242,8 +242,11 @@ function month_calendar($year, $month, $bank_holidays) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printable calendar &#124; www.adonald.co.uk</title>
+    <title>Pantone Converter &#124; www.adonald.co.uk</title>
+    <meta name="description" content="Pantone to CMYK, RGB, and Hex converter">
+    <meta name="keywords" content="Pantone, CMYK, RGB, Hex, Hexadecimal, colour, converter">
     <meta name="author" content="Alex Donald">
+    <link rel="stylesheet" href="/css/adonald.css" />
     <link rel="stylesheet" href="pocketgrid/pocketgrid.min.css" />
     <style type="text/css">
         .select-year {
@@ -305,32 +308,52 @@ function month_calendar($year, $month, $bank_holidays) {
             /* Hide "noprint" elements */
             .noprint {display: none;}
             /* Shrink slightly to fit on one page */
+            .year-calendar {margin: 20px 0 0 0;}
             .month-calendar {font-size: 90%;}
-            .month-calendar .month {padding-top: 0;}
+            .month-calendar .month, .main {padding: 0; margin: 0;}
             .single-month-calendar .month-calendar {height: 600px;}
+            body {line-height: 1.4em;}
         }
-    </style>
+     </style>
 </head>
 <body>
-
-<div class="block-group noprint">
-    <form action="" method="get" class="block select-year">
-        <label for="year">Year:</label>
-        <input type="number" class="year" name="year" value="<?php echo $year; ?>" />
-        <label for="month">Month:</label>
-        <?php echo monthDropdown($month,$months); ?>
-        <label for="holidays">Bank Holidays:</label>
-        <?php echo bankHolidaysDropdown($holidays); ?>
-        <label for="type">Calendar Type:</label>
-        <?php echo calendarTypesDropdown($type); ?>
-        <input type="submit" class="submit" value="submit" />
-    </form>
-</div>
+<header class="noprint">
+    <div class="header-logo">
+        <h1><a href="/" title="Alex Donald">Alex Donald</a></h1>
+    </div>
+    <nav class="header-nav">
+        <ul>
+            </li><li><a href="/pantone" title="Pantone Converter">Pantone Converter</a></li><li><a href="/calendar" title="Printable Calendar" class="current">Printable Calendar</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="main">
+    <section class="content">
+        <div class="block-group noprint">
+            <form action="" method="get" class="block select-year">
+                <label for="year">Year:</label>
+                <input type="number" class="year" name="year" value="<?php echo $year; ?>" />
+                <label for="month">Month:</label>
+                <?php echo monthDropdown($month,$months); ?>
+                <label for="holidays">Bank Holidays:</label>
+                <?php echo bankHolidaysDropdown($holidays); ?>
+                <label for="type">Calendar Type:</label>
+                <?php echo calendarTypesDropdown($type); ?>
+                <input type="submit" class="submit" value="submit" />
+            </form>
+        </div>
+    </section>
 
 <?php
 // Display all months in current or chosen year
 echo calendar($type, $year, $month, $holidays);
 ?>
 
+</section>
+<footer class="noprint">
+    <section class="copyright">
+        <p></p>&copy; Alex Donald &mdash; Help yourself!</p>
+    </section>
+</footer>
 </body>
 </html>
