@@ -1,12 +1,90 @@
 <?php
 /************************************
-*  Shamelessly copied from
-*  http://css-tricks.com/snippets/php/build-a-calendar-table/
-*  Then modified for my
-*  own nefarious purposes
-*  http://www.adonald.co.uk/calendar
-*  Alex Donald 2013-09-16
+*  http://cal.adonald.co.uk/
+*  Alex Donald 2014-01-21
 ************************************/
+
+// Check that only digits have been entered for year
+// Change html from input into special characters
+// Return chosen year, or default to current year
+if (ctype_digit($_GET["year"])) {
+    $year = htmlspecialchars($_GET["year"]);
+} else {
+    $year = date("Y"); //current year
+}
+
+// Check that only digits have been entered for month
+// Change html from input into special characters
+// Return chosen month, or default to current month
+if (ctype_digit($_GET["month"])) {
+    $month = htmlspecialchars($_GET["month"]);
+} else {
+    $month = date("n"); // current month
+}
+// set up the month name array
+$months = [1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'];
+// Create select month drop down for form
+function monthDropdown($selected,$month_array) {
+    $dd = "\t\t<select name='month' id='month' class='month'>\n";
+    for ($i = 1; $i <= 12; $i++) {
+        $dd .= "\t\t\t<option value='".$i."'";
+        if ($i == $selected) {
+            $dd .= " selected";
+        }
+        /*** get the month ***/
+        $dd .= ">".$month_array[$i]."</option>\n";
+    }
+    $dd .= "\t\t</select>\n";
+    return $dd;
+}
+
+// Set up acceptable options for bank holidays
+$possible_bank_holidays =  ["england-and-wales", "scotland", "northern-ireland", "none"];
+// Check that $holidays is an acceptable option
+// or default to england-and-wales
+if (in_array($_GET["holidays"], $possible_bank_holidays)) {
+    $holidays = htmlspecialchars($_GET["holidays"]);
+} else {
+    $holidays = "england-and-wales";
+}
+// Create select region drop down for form
+function bankHolidaysDropdown($selected) {
+    $dd = "\t\t<select name='holidays' id='holidays' class='holidays'>\n";
+    $bankHolidays = ['england-and-wales' => 'England and Wales', 'scotland' => 'Scotland', 'northern-ireland' => 'Northern Ireland', 'none' => 'None'];
+    foreach ($bankHolidays as $key => $val) {
+        $dd .= "\t\t\t<option value='".$key."'";
+        if ($key == $selected) {
+            $dd .= " selected";
+        }
+        $dd .= ">".$val."</option>\n";
+    }
+    $dd .= "\t\t</select>\n";
+    return $dd;
+}
+
+// Set up acceptable options for calendar type
+$calendar_type =  ["year_months", "single_month"];
+// Check that $type is an acceptable option
+// or default to year_months
+if (in_array($_GET["type"], $calendar_type)) {
+    $type = htmlspecialchars($_GET["type"]);
+} else {
+    $type = "year_months";
+}
+// Create select calendar type drop down for form
+function calendarTypesDropdown($selected) {
+    $dd = "\t\t<select name='type' id='calendar-type' class='calendar-type'>\n";
+    $calendar_types = ['year_months' => 'Yearly Planner', 'single_month' => 'Single Month'];
+    foreach ($calendar_types as $key => $val) {
+        $dd .= "\t\t\t<option value='".$key."'";
+        if ($key == $selected) {
+            $dd .= " selected";
+        }
+        $dd .= ">".$val."</option>\n";
+    }
+    $dd .= "\t\t</select>\n";
+    return $dd;
+}
 
 function calendar($type, $year, $month, $holidays) {
 
@@ -248,19 +326,8 @@ function calendarTypesDropdown($selected) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Printable calendar &#124; www.adonald.co.uk</title>
     <meta name="author" content="Alex Donald">
-    <link rel="stylesheet" href="/css/adonald.max.css" />
+    <link rel="stylesheet" href="/pocketgrid.min.css" />
     <style type="text/css">
-        /*! PocketGrid 1.1.0
-        * Copyright 2013 Arnaud Leray
-        * MIT License
-        */.block-group,.block,.block-group:after,.block:after,.block-group:before,.block:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-        .block-group{*zoom:1}
-        .block-group:before,.block-group:after{display:table;content:"";line-height:0}
-        .block-group:after{clear:both}
-        .block-group{list-style-type:none;padding:0;margin:0}
-        .block-group>.block-group{clear:none;float:left;margin:0 !important}
-        .block{float:left;width:100%}
-        /* Keep PocketGrid at the top! */
         .select-year {
             padding: 5px 0 15px 15px;
             font-weight: bold;
@@ -327,32 +394,25 @@ function calendarTypesDropdown($selected) {
     </style>
 </head>
 <body>
-<header>
-    <div class="header-logo">
-        <h1><a href="/" title="Alex Donald">Alex Donald</a></h1>
-    </div>
-    <nav class="header-nav">
-        <ul>
-            <li><a href="/" title="Home">Home</a></li><li><a href="/projects" title="Projects" class="current">Projects</a></li><li><a href="/blog" title="Blog">Blog</a></li><li><a href="/about" title="About">About</a></li>
-        </ul>
-    </nav>
-</header>
-<section class="main">
-    <section class="content">
+
+<div class="block-group noprint">
+    <form action="" method="get" class="block select-year">
+        <label for="year">Year:</label>
+        <input type="number" class="year" name="year" value="<?php echo $year; ?>" />
+        <label for="month">Month:</label>
+        <?php echo monthDropdown($month,$months); ?>
+        <label for="holidays">Bank Holidays:</label>
+        <?php echo bankHolidaysDropdown($holidays); ?>
+        <label for="type">Calendar Type:</label>
+        <?php echo calendarTypesDropdown($type); ?>
+        <input type="submit" class="submit" value="submit" />
+    </form>
+</div>
 
 <?php
 // Display all months in current or chosen year
 echo calendar($type, $year, $month, $holidays);
 ?>
 
-    </section>
-</section>
-<footer>
-    <section class="copyright">
-        <p>Built with <a href="http://jekyllrb.com/">Jekyll</a></p>
-        <p></p>Hosted on <a href="http://www.webfaction.com/?affiliate=adonald">WebFaction</a> (affiliate link)</p>
-        <p></p>&copy; Alex Donald &mdash; Help yourself!</p>
-    </section>
-</footer>
 </body>
 </html>
