@@ -7,10 +7,14 @@
     display: none;
 }
 
-.calendar {
+.month-calendar {
     font-size: 90%;
 }
 
-.calendar .month {
+.month-calendar .month {
     padding-top: 0;
+}
+
+.single-month-calendar .month-calendar {
+    height: 600px;
 }
