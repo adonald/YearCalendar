@@ -301,6 +301,7 @@ function month_calendar($year, $month, $bank_holidays) {
         .holiday {
             background-color: #ceb59d;
         }
+        fieldset, form, label, input, select {display: inline;}
         /* Print styles */
         @media print {
             /* Force webkit to show background colours */
