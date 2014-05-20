@@ -246,6 +246,7 @@ function month_calendar($year, $month, $bank_holidays) {
     <meta name="description" content="Printable yearly and monthly calendar">
     <meta name="keywords" content="calendar, printable, print, yearly, year, monthly, month">
     <meta name="author" content="Alex Donald">
+    <link rel="stylesheet" href="normalize/normalize.css" />
     <link rel="stylesheet" href="pocketgrid/pocketgrid.min.css" />
     <style type="text/css">
         .select-year {
