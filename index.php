@@ -1,6 +1,6 @@
 <?php
 /************************************
-*  http://cal.adonald.co.uk/
+*  http://www.adonald.co.uk/
 *  Alex Donald 2014-01-21
 ************************************/
 
@@ -242,11 +242,10 @@ function month_calendar($year, $month, $bank_holidays) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantone Converter &#124; www.adonald.co.uk</title>
-    <meta name="description" content="Pantone to CMYK, RGB, and Hex converter">
-    <meta name="keywords" content="Pantone, CMYK, RGB, Hex, Hexadecimal, colour, converter">
+    <title>Printable Calendar &#124; www.adonald.co.uk</title>
+    <meta name="description" content="Printable yearly and monthly calendar">
+    <meta name="keywords" content="calendar, printable, print, yearly, year, monthly, month">
     <meta name="author" content="Alex Donald">
-    <link rel="stylesheet" href="/css/adonald.css" />
     <link rel="stylesheet" href="pocketgrid/pocketgrid.min.css" />
     <style type="text/css">
         .select-year {
@@ -318,16 +317,6 @@ function month_calendar($year, $month, $bank_holidays) {
      </style>
 </head>
 <body>
-<header class="noprint">
-    <div class="header-logo">
-        <h1><a href="/" title="Alex Donald">Alex Donald</a></h1>
-    </div>
-    <nav class="header-nav">
-        <ul>
-            </li><li><a href="/pantone" title="Pantone Converter">Pantone Converter</a></li><li><a href="/calendar" title="Printable Calendar" class="current">Printable Calendar</a></li>
-        </ul>
-    </nav>
-</header>
 <section class="main">
     <section class="content">
         <div class="block-group noprint">
@@ -351,10 +340,4 @@ echo calendar($type, $year, $month, $holidays);
 ?>
 
 </section>
-<footer class="noprint">
-    <section class="copyright">
-        <p></p>&copy; Alex Donald &mdash; Help yourself!</p>
-    </section>
-</footer>
-</body>
 </html>
