@@ -249,6 +249,9 @@ function month_calendar($year, $month, $bank_holidays) {
     <link rel="stylesheet" href="normalize/normalize.css" />
     <link rel="stylesheet" href="pocketgrid/pocketgrid.min.css" />
     <style type="text/css">
+        html {
+            font-size: 90%;
+        }
         .select-year {
             padding: 5px 0 15px 15px;
             font-weight: bold;
