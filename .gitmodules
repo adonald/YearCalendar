@@ -1,6 +1,0 @@
-[submodule "pocketgrid"]
-	path = pocketgrid
-	url = https://github.com/arnaudleray/pocketgrid.git
-[submodule "normalize"]
-	path = normalize
-	url = git@github.com:necolas/normalize.css.git
