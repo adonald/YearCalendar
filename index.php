@@ -248,77 +248,7 @@ function month_calendar($year, $month, $bank_holidays) {
     <meta name="author" content="Alex Donald">
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/pocketgrid.min.css" />
-    <style type="text/css">
-        html {
-            font-size: 90%;
-        }
-        .select-year {
-            padding: 5px 0 15px 15px;
-            font-weight: bold;
-        }
-        .year-calendar {
-            margin-bottom: 10px;
-        }
-        .single-month-calendar {
-            text-align:center;
-        }
-        .month-calendar {
-            border: none;
-            border-collapse: collapse;
-            margin: 0 10px;
-            width: 300px;
-        }
-        .single-month-calendar .month-calendar {
-            width: 560px;
-            height: 400px;
-            border-collapse: none;
-            border: 1px solid #000;
-        }
-        .single-month-calendar td {
-            border: 1px solid #000;
-            width: 80px;
-        }
-        .month-calendar .month {
-            text-align: right;
-            font-weight: bold;
-            padding: 2px 5px;
-        }
-        .single-month-calendar .month {
-            font-size: 3em;
-            line-height: 1.5em;
-        }
-        .month-calendar .table-header {
-            background-color: #9cf;
-            font-weight: bold;
-            text-align: center;
-            padding: 0 5px;
-            border-bottom: 1px solid #333;
-        }
-        .month-calendar td {
-            text-align: right;
-            padding: 0 5px;
-        }
-        .weekend {
-            background-color: #ccc;
-        }
-        .holiday {
-            background-color: #ceb59d;
-        }
-        fieldset, form, label, input, select {display: inline;}
-        /* Print styles */
-        @media print {
-            /* Force webkit to show background colours */
-            * {-webkit-print-color-adjust:exact; print-color-adjust:exact;}
-            /* Hide "noprint" elements */
-            .noprint {display: none;}
-            /* Shrink slightly to fit on one page */
-            .year-calendar {margin: 20px 0 0 0;}
-            .month-calendar {font-size: 90%;}
-            .month-calendar .month, .main {padding: 0; margin: 0;}
-            .single-month-calendar .month-calendar {height: 600px;}
-            body {line-height: 1.4em;}
-        }
-     </style>
+    <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 <section class="main">
