@@ -1,23 +1,68 @@
-html {
-    font-size: 90%;
-}
-.select-year {
+fieldset, form, label, input, select {display: inline;}
+form {
     padding: 5px 0 15px 15px;
     font-weight: bold;
 }
+
 .year-calendar {
-    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* tweak where items line
+        up on the row
+        valid values are: flex-start,
+        flex-end, space-between,
+        space-around, stretch */
+    align-content: space-around;
 }
-.single-month-calendar {
-    text-align:center;
-}
-.month-calendar {
-    border: none;
+
+table {
     border-collapse: collapse;
-    margin: 0 10px;
-    width: 300px;
+    margin: 20px 10px;
 }
-.single-month-calendar .month-calendar {
+table caption {
+    text-align: right;
+    font-weight: bold;
+    padding: 2px 5px;
+}
+th {
+    background-color: #9cf;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 5px;
+    border-bottom: 1px solid #333;
+}
+table td {
+    text-align: right;
+    padding: 0 5px;
+}
+td:nth-last-child(-n+2) {
+    background-color: #ccc;
+}
+td[rel="empty"] {
+    background-color: #fff;
+}
+.holiday {
+    background-color: #ceb59d;
+}
+
+.single-month-calendar {
+    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* tweak where items line
+        up on the row
+        valid values are: flex-start,
+        flex-end, space-between,
+        space-around, stretch */
+    align-content: space-around;
+}
+.single-month-calendar table {
     width: 560px;
     height: 400px;
     border-collapse: none;
@@ -26,34 +71,13 @@ html {
 .single-month-calendar td {
     border: 1px solid #000;
     width: 80px;
+    text-align: left;
 }
-.month-calendar .month {
-    text-align: right;
-    font-weight: bold;
-    padding: 2px 5px;
-}
-.single-month-calendar .month {
+.single-month-calendar caption {
     font-size: 3em;
     line-height: 1.5em;
 }
-.month-calendar .table-header {
-    background-color: #9cf;
-    font-weight: bold;
-    text-align: center;
-    padding: 0 5px;
-    border-bottom: 1px solid #333;
-}
-.month-calendar td {
-    text-align: right;
-    padding: 0 5px;
-}
-.weekend {
-    background-color: #ccc;
-}
-.holiday {
-    background-color: #ceb59d;
-}
-fieldset, form, label, input, select {display: inline;}
+
 /* Print styles */
 @media print {
     /* Force webkit to show background colours */
@@ -61,9 +85,7 @@ fieldset, form, label, input, select {display: inline;}
     /* Hide "noprint" elements */
     .noprint {display: none;}
     /* Shrink slightly to fit on one page */
-    .year-calendar {margin: 20px 0 0 0;}
-    .month-calendar {font-size: 90%;}
-    .month-calendar .month, .main {padding: 0; margin: 0;}
-    .single-month-calendar .month-calendar {height: 600px;}
-    body {line-height: 1.4em;}
+    html, body, .year-calendar, table, main {margin: 0; padding:0;}
+    table {margin-top: 10px;}
+    .single-month-calendar table {height: 600px;}
 }

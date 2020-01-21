@@ -99,17 +99,17 @@ function calendar($type, $year, $month, $holidays) {
     if ($type == "year_months") {
         // Display all months in current or chosen year
         $month = 1; // Over-ride $month, set 1st month to Jan
-        $calendar = "<div class=\"block-group year-calendar\">\n";
+        $calendar = "<section class=\"year-calendar\">\n";
         while($month <= 12){
             $calendar .= month_calendar($year, $month, $bank_holidays);
             $month++;
         }
-        $calendar .= "</div>\n";
+        $calendar .= "</section>\n";
         return $calendar;
     } elseif ($type == "single_month") {
-        $calendar = "<div class=\"block-group single-month-calendar\">\n";
+        $calendar = "<section class=\"single-month-calendar\">\n";
         $calendar .= month_calendar($year, $month, $bank_holidays);
-        $calendar .= "</div>\n";
+        $calendar .= "</section>\n";
         return $calendar;
     }
 }
@@ -121,7 +121,7 @@ function is_date_holiday($id, $array) {
             return true;
         }
     }
-    return null;
+    return false;
 }
 
 function month_calendar($year, $month, $bank_holidays) {
@@ -146,6 +146,8 @@ function month_calendar($year, $month, $bank_holidays) {
     // month in question.
     // Subtract 1 from value to start week on Monday
     // (looping Sun back to replace Sat)
+    //$dayOfWeek = ($dateComponents['wday'] % 7) - 1;
+    //$dayOfWeek = ($dateComponents['wday'] - 1) % 7;
     if ($dateComponents['wday'] == 0) {
         $dayOfWeek = 6;
     } else {
@@ -153,29 +155,32 @@ function month_calendar($year, $month, $bank_holidays) {
     }
 
     // Create the table tag opener and day headers
-    $month_calendar = "<table class='block month-calendar'>\n";
-    $month_calendar .= "\t<caption class='month'>$monthName $year</caption>\n";
-    $month_calendar .= "\t<tr>\n";
+    $month_calendar = "<table>\n";
+    $month_calendar .= "\t<caption>$monthName $year</caption>\n";
+    $month_calendar .= "\t<thead>\n";
+    $month_calendar .= "\t\t<tr>\n";
 
     // Create the calendar headers
     foreach($daysOfWeek as $day) {
-        $month_calendar .= "\t\t<th class='table-header'>$day</th>\n";
+        $month_calendar .= "\t\t\t<th>$day</th>\n";
     } 
 
+    $month_calendar .= "\t\t</tr>\n\t</thead>\n";
+
     // Create the rest of the calendar
+    
+    $month_calendar .= "\t<tbody>\n\t\t<tr>\n";
 
     // Initiate the day counter, starting with the 1st.
     $currentDay = 1;
     // Initiate the row counter, starting with 1
     $weekRow = 1;
 
-    $month_calendar .= "\t</tr>\n\t<tr>\n";
-
     // The variable $dayOfWeek is used to
     // ensure that the calendar
     // display consists of exactly 7 columns.
-    if ($dayOfWeek > 0) { 
-        $month_calendar .= "\t\t<td colspan='$dayOfWeek'>&nbsp;</td>\n"; 
+    for ($i = 0; $i < $dayOfWeek; $i++) {
+        $month_calendar .= "\t\t\t<td rel=\"empty\">&nbsp;</td>\n";
     }
 
     $month = str_pad($month, 2, "0", STR_PAD_LEFT);
@@ -186,7 +191,7 @@ function month_calendar($year, $month, $bank_holidays) {
         if ($dayOfWeek == 7) {
 
             $dayOfWeek = 0;
-            $month_calendar .= "\t</tr>\n\t<tr>\n";
+            $month_calendar .= "\t\t</tr>\n\t\t<tr>\n";
             $weekRow++;
 
         }
@@ -195,22 +200,13 @@ function month_calendar($year, $month, $bank_holidays) {
 
         $date = "$year-$month-$currentDayRel";
 
-        // Is day a weekday or a weekend
-        if ($dayOfWeek >= 5) {
-            $class = "weekend";
-        } else {
-            $class = "weekday";
-        }
-
         // Is day a bank holiday
-        if ($bank_holidays != false) {
-            if (is_date_holiday($date, $bank_holidays)) {
-                $class .= " holiday";
-            }
-        }
+        $class = !empty($bank_holidays) && is_date_holiday($date, $bank_holidays)
+                ? 'class="holiday"'
+                : "";
 
         // change class for weekend or weekday, and holiday
-        $month_calendar .= "\t\t<td class='$class' rel='$date'>$currentDay</td>\n";
+        $month_calendar .= "\t\t\t<td $class rel='$date'>$currentDay</td>\n";
 
         // Increment counters
         $currentDay++;
@@ -219,20 +215,13 @@ function month_calendar($year, $month, $bank_holidays) {
     }
 
     // Complete the row of the last week in month, if necessary
-    if ($dayOfWeek != 7) { 
-        $remainingDays = 7 - $dayOfWeek;
-        $month_calendar .= "\t\t<td colspan='$remainingDays'>&nbsp;</td>\n"; 
+    for ($i = $dayOfWeek; $i < 7; $i++) {
+        $month_calendar .= "\t\t\t<td rel=\"empty\">&nbsp;</td>\n";
     }
 
     $month_calendar .= "\t</tr>\n";
 
-    // Add blank row to bottom of table if necessary to ensure all
-    // months are the same height
-    if ($weekRow <= 5) {
-        $month_calendar .= "\t<tr>\n\t\t<td colspan='7'>&nbsp;</td>\n\t</tr>\n";
-    }
-
-    $month_calendar .= "</table>\n";
+    $month_calendar .= "\t</tbody>\n</table>\n";
 
     return $month_calendar;
 }
@@ -242,17 +231,17 @@ function month_calendar($year, $month, $bank_holidays) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printable Calendar &#124; www.adonald.co.uk</title>
+    <title>Printable Calendar &#124; www.alexdonald.co.uk</title>
     <meta name="description" content="Printable yearly and monthly calendar">
     <meta name="keywords" content="calendar, printable, print, yearly, year, monthly, month">
     <meta name="author" content="Alex Donald">
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-<section class="main">
-    <section class="content">
-        <div class="block-group noprint">
-            <form action="" method="get" class="block select-year">
+<main>
+    <nav>
+        <div class="noprint">
+            <form action="" method="get">
                 <label for="year">Year:</label>
                 <input type="number" class="year" name="year" value="<?php echo $year; ?>" />
                 <label for="month">Month:</label>
@@ -264,12 +253,13 @@ function month_calendar($year, $month, $bank_holidays) {
                 <input type="submit" class="submit" value="submit" />
             </form>
         </div>
-    </section>
+    </nav>
 
 <?php
 // Display all months in current or chosen year
 echo calendar($type, $year, $month, $holidays);
 ?>
 
-</section>
+</main>
+</body>
 </html>
